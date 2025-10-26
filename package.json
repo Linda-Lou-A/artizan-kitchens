@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build-css": "tailwindcss -i ./src/input.css -o ./dist/output.css --minify" 
-  },
+  "build-css": "tailwindcss -i ./src/input.css -o ./dist/output.css --minify",
+  "init-tailwind": "tailwindcss init -p"
+},
   "keywords": [],
   "author": "",
   "license": "ISC",
