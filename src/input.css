@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom CSS to fix the white gap goes here */
+.hero-image-full-cover {
+    width: 100% !important; 
+    height: 402px !important; /* Forces 2px extra height */
+    margin-top: -1px !important; /* Shifts up 1px to hide artifacts */
+    display: block !important; 
+    margin-left: 0 !important;
+}
+
+/* Include any other custom rules you might have */

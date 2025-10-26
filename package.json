@@ -1,0 +1,13 @@
+{
+  "name": "artizan-kitchens",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+ "scripts": {
+  "build-css": "node_modules\\.bin\\tailwindcss.cmd -i ./src/input.css -o ./dist/output.css --watch",
+  "test": "echo \"Error: no test specified\" && exit 1"
+},
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

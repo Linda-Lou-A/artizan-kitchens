@@ -1,0 +1,453 @@
+<!-- 
+    Single-file About Us Page
+    Uses Tailwind CSS for quick, responsive styling.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/jpg" href="./images/favicon.jpg">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+   <link href="./dist/output.css" rel="stylesheet">
+    <title>About Us - Design & Install</title>
+    <!-- Load Tailwind CSS -->
+         <style>
+       body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f4f7f6; /* Light gray background */
+        }
+        /* Custom styles for accent color */
+        .text-ralblue { color: #0079AB; }
+        .bg-ralblue { background-color: #0079AB; }
+        .border-ralblue { border-color: #ffc82d; }
+          /* Custom non-Tailwind styles for consistent navigation styling */
+    .nav-link {
+        font-weight: bold;
+        color: #333 !important; /* Force black text */
+        transition: color 0.3s ease;
+        padding: 10px 15px;
+        text-decoration: none;
+    }
+    .nav-link:hover {
+        color: #0079AB !important; /* Blue on hover */
+    }
+    .logo-text {
+        color: #0079AB !important; /* Force blue logo text */
+        font-weight: 800;
+        font-size: 1.5rem;
+        text-decoration: none;
+    }
+    .nav-menu {
+        display: flex;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    .menu-toggle {
+        /* Use !important to ensure this hides the desktop button styles */
+        display: none !important; 
+        font-size: 1.5rem;
+        cursor: pointer;
+        background: none;
+        border: none;
+        color: #333;
+    }
+    /* === FIX: Explicitly set margin for desktop spacing === */
+    .nav-menu li {
+        margin-right: 40px !important; /* Increased, guaranteed spacing */
+    }
+    .nav-menu li:last-child {
+        margin-right: 0 !important; /* Remove margin from the very last item */
+    }
+     /* Footer */
+        footer { background-color: #333; color: #ccc; padding: 40px 20px; text-align: center; font-size: 0.9em; }
+        .footer-links ul { list-style: none; padding: 0; display: flex; justify-content: center; gap: 20px; margin-bottom: 20px; }
+        .footer-links a { color: #ccc; text-decoration: none; transition: color 0.2s; }
+        .footer-links a:hover { color: #FFC82D; } /* Using yellow for footer link hover */
+        .contact-info p { margin: 5px 0; }
+        .copyright { margin-top: 20px; border-top: 1px solid #555; padding-top: 15px; }
+    /* ====================================================== */
+/* === New: Blue Background for Intro Text === */
+    .intro-blue-background {
+        background-color: #0079AB;
+        color: white; /* Ensures text is readable on the blue background */
+        padding-top: 20px;
+        padding-bottom: 20px;
+        margin-bottom: 30px; /* Add space between the intro and the content below it */
+        text-align: center;
+    }
+    /* === Mobile Menu Styles (max-width: 768px) === */
+    @media (max-width: 768px) {
+        .menu-toggle {
+            display: block !important; /* Force show hamburger button on mobile */
+        }
+        .nav-menu-mobile {
+            /* Full-screen overlay for mobile menu - starts hidden */
+            display: none; 
+            position: absolute;
+            top: 64px; /* Below the header height (h-16) */
+            left: 0;
+            right: 0;
+            background-color: white;
+            flex-direction: column;
+            width: 100%;
+            border-top: 1px solid #ccc;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            z-index: 99; /* Below the sticky header, but above content */
+        }
+        .nav-menu-mobile.active {
+            display: flex; /* Show menu when 'active' class is toggled by JS */
+        }
+        .nav-menu-mobile li {
+            width: 100%;
+            border-bottom: 1px solid #eee;
+        }
+        .nav-menu-mobile .nav-link {
+            display: block;
+            padding: 15px 20px;
+            text-align: left;
+            width: 100%;
+        }
+    }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">                  
+    
+    <!-- Header Section (Only ONE Header allowed) -->
+<header id="main-header" style="background-color: white; border-bottom: 1px solid #ccc; position: sticky; top: 0; z-index: 100;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-row items-center h-16 gap-8">
+        <a href="index.html" class="logo-text">Artizan Kitchens</a>
+
+        <!-- Desktop Navigation (Visible only on medium screens and up) -->
+        <nav class="hidden md:block">
+            <ul class="nav-menu"> 
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <!-- IMPORTANT: Highlight the current page (About) -->
+                <li><a href="about.html" class="nav-link" style="color: #0079AB;">About</a></li>
+                <li><a href="kitchens.html" class="nav-link">Kitchens</a></li>
+                <li><a href="bedrooms.html" class="nav-link">Bedrooms</a></li>
+                <li><a href="testimonials.html" class="nav-link">Testimonials</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+        </nav>
+        <!-- Mobile Menu Button: 'ml-auto' pushes it to the far right on mobile -->
+        <button id="menu-toggle-btn" class="menu-toggle md:hidden ml-auto" aria-label="Toggle navigation">
+            &#9776; <!-- Hamburger Icon -->
+        </button>
+    </div>
+
+    <!-- Mobile Navigation (Placed OUTSIDE the main row, below the header row) -->
+    <nav id="mobile-menu" class="nav-menu-mobile md:hidden">
+        <ul>
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="about.html" class="nav-link" style="color: #0079AB;">About</a></li>
+            <li><a href="kitchens.html" class="nav-link">Kitchens</a></li>
+            <li><a href="bedrooms.html" class="nav-link">Bedrooms</a></li>
+            <li><a href="testimonials.html" class="nav-link">Testimonials</a></li>
+            <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+<!-- END OF HEADER -->
+        <!-- Logo Placed ABOVE Hero Section (Centered) -->
+<section style="padding: 20px 0; background-color: #ffffff;">
+    <div class="container" style="text-align: center;">
+        <!-- NOTE: The size (height: 80px) is just a suggestion. Adjust as needed! -->
+        <img src="./images/logo.jpg" 
+             alt="Artizan Kitchens Logo" 
+             style="height: 100px; width: auto; display: block; margin: 0 auto;">
+    </div>
+</section>
+
+<!-- Page Introduction Section with Blue Background (Replaces old kitchen-hero section) -->
+<section class="page-intro-section">
+    <!-- This div applies the blue background and white text globally across the width -->
+    <div class="intro-blue-background">
+        <!-- This inner div centers the content and provides horizontal padding -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- IMPORTANT: Text must be inside this inner div -->
+            <h1 class="text-4xl font-extrabold mb-4">Crafting Beautiful Kitchens Since 2008</h1>
+            <p class="text-xl max-w-4xl mx-auto">We are an English-managed company based in Spain, dedicated to creating bespoke, high-quality kitchens built around your life and style.</p>
+        </div>
+    </div>
+</section>
+
+<!-- MAIN CONTENT STARTS HERE (e.g., Team photos, values, etc.) -->
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const toggleButton = document.getElementById('menu-toggle-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (toggleButton && mobileMenu) {
+            toggleButton.addEventListener('click', () => {
+                // Toggle the 'active' class to show/hide the menu
+                mobileMenu.classList.toggle('active');
+            });
+            // Auto-close menu when a link is clicked
+            mobileMenu.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    // Slight delay for anchor links to allow scrolling to happen
+                    setTimeout(() => mobileMenu.classList.remove('active'), 100);
+                });
+            });
+        }
+    });
+</script>
+    <main class="flex-grow container mx-auto px-4 py-12">
+        <div class="max-w-4xl mx-auto">
+                        <!-- SECTION 1: Headline & Core Values -->
+            <div class="text-center mb-12">
+                <h2 class="text-5xl font-extrabold text-gray-800 mb-4">
+                    Over 15 Years of Trusted Kitchen Expertise
+                </h2>
+                <p class="text-xl text-gray-600">
+                    Designing, supplying, and installing dream kitchens for the Almería expat community.
+                </p>
+                <p style="max-width: 800px; margin: 20px auto; font-size: 1.1em; line-height: 1.6; color: #555;">
+        Founded specifically to serve the international community in Almería, Artizan Kitchens understands the unique needs and expectations of our clients. We combine the reliability and quality standards you expect from a premium European brand with the local knowledge required for flawless installation in Spain. We manage the entire project from start to finish, allowing you to relax and enjoy the transformation of your home.
+    </p>
+            </div>
+
+            <!-- SECTION 2: Team Structure (Husband & Wife) -->
+            <div class="grid md:grid-cols-2 gap-12 items-center bg-white p-8 rounded-xl shadow-lg mb-12 border-t-4 border-ralblue">
+                
+                <div class="order-2 md:order-1">
+                  <h3 class="text-3xl font-bold text-ralblue mb-4 md:whitespace-nowrap">A Family Business - Built on Experience</h3>
+                    <p class="text-gray-700 mb-4 text-lg">
+                        We are a dedicated <strong>husband and wife team</strong> who combine our strengths to offer you a <strong>professional, efficient, and truly personalised service.</strong> Unlike large, impersonal chains, you work directly with us from start to finish.
+                    </p>
+                    <p class="text-gray-700 mb-4 text-lg font-semibold">
+                        Together, we bring <strong>over 36 years of combined experience</strong> in kitchen design and installation.
+                    </p>
+                    
+                    <!-- Team Roles List -->
+                    <div class="space-y-4 mt-6">
+                        <div class="flex items-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0079AB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-1"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                            <div class="ml-3">
+                                <h4 class="font-semibold text-gray-800">The Technical Expert (Paul)</h4>
+                                <p class="text-gray-600">Handling all <strong>measuring, 3D design concepts, and expert fitting</strong>. He ensures every detail is perfect, minimizing stress during installation.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0079AB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-1"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M18 10a6 6 0 0 1-12 0"/><line x1="12" x2="12" y1="18" y2="22"/></svg>
+                            <div class="ml-3">
+                                <h4 class="font-semibold text-gray-800">The Design Consultant (Eve)</h4>
+                                <p class="text-gray-600">Your first point of contact, managing sales and helping you select the perfect materials in their showroom to fit your style and budget.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Image Placeholder (Can be replaced with shop interior/exterior) -->
+                <div class="order-1 md:order-2">
+                    <img 
+                        src="https://placehold.co/600x400/D9D9D9/333333?text=Placeholder+Shop+Image" 
+                        alt="Image of the kitchen showroom exterior or interior" 
+                        class="w-full h-auto rounded-lg shadow-xl object-cover"
+                    />
+                </div>
+            </div>
+
+            <!-- SECTION 3: Why Choose Them -->
+            <div class="text-center py-8">
+                <h3 class="text-3xl font-bold text-gray-800 mb-6">Committed to the Local Community</h3>
+                <div class="flex flex-col md:flex-row justify-center gap-6">
+                    <div class="p-6 border border-ralblue rounded-xl bg-white shadow-md flex-1">
+                        <p class="text-4xl font-extrabold text-ralblue">15+</p>
+                        <p class="text-gray-700 font-medium">Years Established in the Area</p>
+                    </div>
+                    <div class="p-6 border border-ralblue rounded-xl bg-white shadow-md flex-1">
+                        <p class="text-4xl font-extrabold text-ralblue">36+</p>
+                        <p class="text-gray-700 font-medium">Years of Combined Industry Experience</p>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </main>
+
+    <!-- FOOTER (Placeholder) -->
+     <footer>
+        <div class="container">
+            <div class="footer-links">
+                <ul>
+                    <li><a href="testimonials.html">Reviews</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Use</a></li> 
+                </ul>
+            </div>
+            <div class="contact-info">
+                <p>Artizan Kitchens | Vera, Almería Spain</p>
+                <p>Email: artizan4@yahoo.co.uk | Phone: +34 950 390 635 / 661 985 310</p>
+            </div>
+            <p class="copyright">&copy; 2025 Artizan Kitchens. All rights reserved.</p>
+        </div>
+    </footer>
+    <!-- COOKIE CONSENT MODAL/BANNER -->
+    <div id="cookie-consent-modal" class="fixed inset-x-0 bottom-0 z-50 p-4 transition-transform duration-500 transform translate-y-full">
+        <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-2xl border-t-4 border-artizan-blue p-6 md:flex md:items-center md:justify-between space-y-4 md:space-y-0">
+            
+            <!-- Standard Consent View -->
+            <div id="consent-view-main" class="w-full flex flex-col md:flex-row md:items-center justify-between">
+                <p class="text-gray-700 text-sm md:text-base md:mr-6">
+                    We use cookies to enhance your browsing experience. By clicking "Accept All", you consent to the use of all cookies. You can manage your preferences at any time.
+                    <a href="privacy.html" class="text-artizan-blue hover:underline font-medium ml-1 whitespace-nowrap">Read our policy.</a>
+                </p>
+                
+                <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3 mt-4 md:mt-0 flex-shrink-0">
+                    <button onclick="declineCookies()" class="px-4 py-2 text-sm font-semibold rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-100 transition duration-150">
+                        Decline All
+                    </button>
+                    <button onclick="showModifySettings()" class="px-4 py-2 text-sm font-semibold rounded-lg text-artizan-blue hover:bg-artizan-blue hover:text-white transition duration-150 border border-artizan-blue">
+                        Modify Settings
+                    </button>
+                    <button onclick="acceptCookies()" class="px-4 py-2 text-sm font-semibold rounded-lg bg-artizan-yellow text-gray-800 hover:bg-[#e5b428] transition duration-150">
+                        Accept All
+                    </button>
+                </div>
+            </div>
+
+            <!-- Modify Settings View (Hidden by default) -->
+            <div id="consent-view-modify" class="w-full hidden">
+                <h3 class="text-xl font-bold text-artizan-blue mb-4 border-b pb-2">Cookie Preferences</h3>
+
+                <div class="space-y-4 mb-6">
+                    <!-- Essential Cookies -->
+                    <label class="flex items-center space-x-3 cursor-not-allowed opacity-70">
+                        <input type="checkbox" id="cookie-essential" name="cookie-essential" checked disabled class="h-5 w-5 rounded text-gray-400 bg-gray-100 border-gray-300">
+                        <span class="text-base font-medium text-gray-900">Essential <span class="text-xs text-artizan-blue font-bold">(Always Active)</span></span>
+                        <p class="text-sm text-gray-500 ml-auto">Required for basic site functionality.</p>
+                    </label>
+
+                    <!-- Analytical Cookies -->
+                    <label class="flex items-center space-x-3 cursor-pointer">
+                        <input type="checkbox" id="cookie-analytical" name="cookie-analytical" checked class="h-5 w-5 rounded text-artizan-blue focus:ring-artizan-blue border-gray-300">
+                        <span class="text-base font-medium text-gray-900">Analytical</span>
+                        <p class="text-sm text-gray-500 ml-auto">Helps us understand how the site is used.</p>
+                    </label>
+
+                    <!-- Marketing Cookies -->
+                    <label class="flex items-center space-x-3 cursor-pointer">
+                        <input type="checkbox" id="cookie-marketing" name="cookie-marketing" class="h-5 w-5 rounded text-artizan-blue focus:ring-artizan-blue border-gray-300">
+                        <span class="text-base font-medium text-gray-900">Marketing</span>
+                        <p class="text-sm text-gray-500 ml-auto">Used for personalized promotions.</p>
+                    </label>
+                </div>
+
+                <div class="flex justify-end space-x-3">
+                    <button onclick="showMainView()" class="px-4 py-2 text-sm font-semibold rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-100 transition duration-150">
+                        Back
+                    </button>
+                    <button onclick="savePreferences()" class="px-4 py-2 text-sm font-semibold rounded-lg bg-artizan-blue text-white hover:bg-[#005f88] transition duration-150">
+                        Save Preferences
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END OF COOKIE CONSENT MODAL/BANNER -->
+
+    <!-- START OF JAVASCRIPT: Place this script tag just before the closing </body> -->
+    <script>
+        // --- Cookie Consent Logic ---
+
+        const CONSENT_KEY = 'artizan_cookie_consent';
+        const modal = document.getElementById('cookie-consent-modal');
+        const mainView = document.getElementById('consent-view-main');
+        const modifyView = document.getElementById('consent-view-modify');
+        
+        const cookieTypes = ['analytical', 'marketing'];
+
+        /** Checks localStorage on page load and shows the modal if no consent is found. */
+        function checkConsentStatus() {
+            const consent = localStorage.getItem(CONSENT_KEY);
+            if (!consent) {
+                // Show the modal by removing the 'translate-y-full' class
+                modal.classList.remove('translate-y-full');
+            } else {
+                console.log('Cookie Consent Status:', consent);
+            }
+        }
+
+        /** Sets the consent status in localStorage and hides the modal. */
+        function setConsent(status, preferences = {}) {
+            modal.classList.add('translate-y-full');
+            
+            let data = { status: status };
+            if (status === 'custom') {
+                data.preferences = preferences;
+            }
+
+            localStorage.setItem(CONSENT_KEY, JSON.stringify(data));
+            console.log('Consent Updated:', data);
+        }
+
+        /** Handles the "Accept All" button click. */
+        function acceptCookies() {
+            const allPrefs = {};
+            cookieTypes.forEach(type => allPrefs[type] = true);
+            setConsent('accepted', allPrefs);
+        }
+
+        /** Handles the "Decline All" button click. */
+        function declineCookies() {
+            const noPrefs = {};
+            cookieTypes.forEach(type => noPrefs[type] = false);
+            setConsent('declined', noPrefs);
+        }
+
+        /** Switches the view to show the cookie modification settings. */
+        function showModifySettings() {
+            mainView.classList.add('hidden');
+            modifyView.classList.remove('hidden');
+            
+            const consentData = JSON.parse(localStorage.getItem(CONSENT_KEY) || '{}');
+            const prefs = consentData.preferences || {};
+            
+            document.getElementById('cookie-analytical').checked = prefs.analytical !== false;
+            document.getElementById('cookie-marketing').checked = prefs.marketing === true;
+        }
+
+        /** Switches the view back to the main consent options. */
+        function showMainView() {
+            mainView.classList.remove('hidden');
+            modifyView.classList.add('hidden');
+        }
+
+        /** Handles the "Save Preferences" button click from the modify view. */
+        function savePreferences() {
+            const preferences = {
+                essential: true, 
+                analytical: document.getElementById('cookie-analytical').checked,
+                marketing: document.getElementById('cookie-marketing').checked,
+            };
+            
+            const allAccepted = preferences.analytical && preferences.marketing;
+            const allDeclined = !preferences.analytical && !preferences.marketing;
+
+            if (allAccepted) {
+                setConsent('accepted', preferences);
+            } else if (allDeclined) {
+                setConsent('declined', preferences);
+            } else {
+                setConsent('custom', preferences);
+            }
+            
+            showMainView();
+        }
+
+        // Initialize the consent check once the DOM is fully loaded
+        // This function must be placed AFTER the mobile menu toggle function if it exists.
+        // It's called after all other window.onload tasks (like mobile menu toggle initialization).
+        window.addEventListener('load', checkConsentStatus);
+
+    </script>
+
+</body>
+</html>

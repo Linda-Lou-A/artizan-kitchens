@@ -1,0 +1,480 @@
+@charset "utf-8"; 
+/* --- 0. GLOBAL STYLES & FONT DEFINITIONS --- */
+body {
+    font-family: 'Lato', sans-serif; 
+    margin: 0;
+    padding: 0;
+    color: #212529; 
+    line-height: 1.6;
+    background-color: #ffffff;
+}
+
+h1, h2, h3, h4, header .logo a {
+    font-family: 'Montserrat', sans-serif; 
+    color: #212529;
+    font-weight: 800; 
+    line-height: 1.2;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px; 
+    margin: 0 auto;
+}
+
+/* Style for the main heading underline */
+.underlined-heading {
+    /* Uses a solid border for a clean underline effect */
+    border-bottom: 3px solid #0079AB; /* RAL 5015 blue */
+    display: inline-block; /* Makes the line only as wide as the text */
+    padding-bottom: 5px; /* Adds a small gap between text and line */
+    margin-bottom: 10px; /* Space between the heading and the new subtitle */
+    color: #0079AB; /* Ensures the text remains the brand blue */
+}
+
+/* Style for the new subtitle/paragraph (BOLD BLACK) */
+.process-subtitle {
+    font-size: 18px;
+    margin-bottom: 40px; /* Adds space before the next section content */
+    color: #000;      /* Changed to Black */
+    font-style: normal; /* Removes the italic style */
+    font-weight: bold; /* Makes the text bold */
+}
+
+/* --- NEW: Button Base Styles (for .btn and .btn-primary) --- */
+.btn {
+    /* Base Button Styles for the main hero CTA */
+    display: inline-block;
+    padding: 10px 25px;
+    border-radius: 5px; 
+    text-decoration: none;
+    font-weight: 700;
+    transition: background-color 0.3s;
+    text-transform: uppercase; 
+    margin-top: 20px; 
+}
+
+/* Primary CTA Button Style - Muted Navy Blue Accent Color (Header/Final CTA) */
+.cta-button, .primary-cta-btn {
+    background-color: #FFC107; /* Changed to Yellow Accent Color */
+    color: #212529 !important; /* Dark text for contrast */
+    padding: 10px 25px;
+    border-radius: 2px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.cta-button:hover, .primary-cta-btn:hover {
+    background-color: #E0A800; /* Darker Yellow for Hover */
+}
+/* Secondary CTA Button Style (View All Kitchens) */
+.secondary-cta-btn {
+    display: inline-block;
+    padding: 10px 25px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.3s ease; 
+    
+    /* Secondary Style: White background with blue border */
+    background-color: transparent;
+    color: #0079AB; /* RAL 5015 Text Color */
+    border: 2px solid #0079AB; /* RAL 5015 Border Color */
+    
+    margin-top: 30px; 
+}
+
+.secondary-cta-btn:hover {
+    /* Hover: Fill the button with the blue color */
+    background-color: #0079AB;
+    color: white; 
+}
+
+/* Primary CTA Button Style - Muted Navy Blue Accent Color (Header/Final CTA) */
+.cta-button, .primary-cta-btn {
+    background-color: #0079ab; /* New Accent Color */
+    color: white !important;
+    padding: 10px 25px;
+    border-radius: 2px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.cta-button:hover, .primary-cta-btn:hover {
+    background-color: #2894c2; /* Darker New Accent Color for Hover */
+}
+
+/* --- 1. NAVIGATION HEADER --- */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background-color: #ffffff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+
+    /* CRITICAL FIXES FOR STACKING: */
+    position: relative; /* Required for z-index to work */
+    z-index: 50; /* SUPER HIGH Z-INDEX to ensure it's above the image */
+}
+
+
+/* Hide mobile wrapper on desktop */
+.cta-wrapper-mobile {
+    display: none;
+}
+
+/* Ensure the desktop CTA is visible by default */
+.cta-desktop {
+    display: inline-block;
+}
+
+header ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+header a {
+    text-decoration: none;
+    color: #212529;
+    padding: 10px 15px;
+    font-weight: 600;
+}
+
+header a:hover {
+    color: #0079ab; /* New Accent Color Hover */
+}
+S
+
+/* --- 2. HERO SECTION (STANDARD PATH) --- */
+/* Hero Section */
+.hero-section { 
+    /* Defines the container size and GUARANTEES BLUE BACKGROUND */
+    position: relative;
+    height: 470px; /* Total height of the banner */
+    background-color: #0079AB; 
+    color: white; 
+    text-align: center; 
+    overflow: hidden; 
+    padding: 0;
+    margin-bottom: 30px; 
+}
+
+/* Style for the text container (sits in the top half) */
+.hero-content {
+    position: relative; 
+    padding: 30px 20px 0; 
+    max-width: 800px; 
+    margin: 0 auto; 
+    background-color: transparent; 
+}
+
+/* Wrapper to constrain and position the image */
+.hero-image-wrapper {
+    position: absolute;
+    bottom: 0; 
+    
+    /* CRITICAL: Centering the wrapper horizontally */
+    left: 50%; 
+    transform: translateX(-50%); 
+    
+    width: 90%; /* Use responsive width, but constrain max-width */
+    max-width: 1000px; 
+    
+    height: 270px; /* Fixed height for the image area */
+    overflow: hidden;
+    border-radius: 8px 8px 0 0; 
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.2); 
+}
+
+.hero-image-wrapper img {
+    /* Ensures the image fills the constrained wrapper */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .hero-section {
+        height: 400px;
+    }
+    .hero-image-wrapper {
+        height: 200px;
+        width: 95%;
+    }
+}
+
+/* --- 3. TRUST ICONS SECTION --- */
+.trust-icons-section {
+    padding: 60px 0; 
+    background-color: #f8f9fa; 
+    text-align: center;
+}
+
+.trust-icons-section .container {
+    display: flex; 
+    justify-content: space-between; 
+    gap: 30px; 
+}
+
+.feature-card {
+    flex-basis: 33%; 
+    padding: 20px;
+}
+
+.feature-card h3 {
+    color: #0079ab; /* New Accent Color */
+    margin-top: 10px;
+}
+
+/* --- 4. KITCHEN GALLERY PREVIEW --- */
+/* Kitchen Preview */
+.kitchen-preview-section {
+    text-align: center;
+    padding: 60px 20px;
+}
+.kitchen-preview-section h2 { 
+    /* This rule must also include the yellow border fix */
+    border-bottom: 3px solid #FFC82D !important; /* Yellow underline */
+    display: inline-block; 
+    padding-bottom: 5px; 
+    margin-bottom: 10px; 
+    font-family: 'Montserrat', sans-serif; 
+}
+.kitchen-gallery-grid {
+    /* CRITICAL FIX: Ensures 3 cards fit side-by-side */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Forces three columns of equal width */
+    gap: 20px;
+    margin: 30px 0;
+}
+
+.range-card {
+    flex-basis: calc(50% - 15px); 
+    text-decoration: none;
+    color: #212529;
+    overflow: hidden; 
+    text-align: left;
+    transition: transform 0.3s ease;
+}
+
+.range-card:hover {
+    transform: translateY(-5px); 
+}
+
+.range-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover; 
+    aspect-ratio: 4/3; 
+}
+
+.range-card h3 {
+    font-size: 1.4em;
+    margin-top: 15px;
+    color: #0079ab; /* New Accent Color */
+}
+
+/* --- 5. THE PROCESS / 3D DIFFERENCE --- */
+.process-section {
+    padding: 80px 5%;
+    background-color: #ffffff; 
+    text-align: center;
+}
+
+.process-steps {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.step {
+    flex-basis: calc(33.33% - 20px); 
+    padding: 20px;
+}
+
+.step span {
+    display: block;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    margin: 0 auto 20px auto;
+    border-radius: 50%; 
+    background-color: #0079ab; /* New Accent Color */
+    color: white;
+    font-size: 1.5em;
+    font-weight: 800;
+}
+
+/* --- 6. FINAL CALL TO ACTION --- */
+.final-cta-section {
+    padding: 100px 5%; 
+    background-color: #212529; 
+    color: #ffffff;
+    text-align: center;
+}
+
+.final-cta-section h2 {
+    color: #ffffff;
+    font-size: 2.2em;
+    margin-bottom: 20px;
+}
+
+
+/* --- 7. FOOTER --- */
+footer {
+    background-color: #343a40; 
+    color: #f8f9fa; 
+    padding: 40px 5%;
+    display: flex; 
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.footer-links, .contact-info, .copyright {
+    flex-basis: 30%; 
+    min-width: 200px;
+}
+
+footer ul {
+    list-style: none;
+    padding: 0;
+}
+
+footer a {
+    color: #ced4da; 
+    text-decoration: none;
+    line-height: 2;
+    transition: color 0.3s;
+}
+
+footer a:hover {
+    color: #0079ab; /* New Accent Color Hover */
+}
+
+.copyright {
+    text-align: right;
+    font-size: 0.8em;
+    color: #6c757d;
+}
+/* --- 8. MOBILE RESPONSIVENESS (Media Queries) --- */
+@media (max-width: 768px) {
+    /* HIDE DESKTOP CTA BUTTON ON MOBILE */
+    .cta-desktop {
+        display: none;
+    }
+
+    /* GENERAL LAYOUT FIXES (Addressing content pushed left) */
+    main {
+        padding: 0; 
+        width: 100%;
+    }
+
+    /* Override any fixed container widths for small screens */
+    .container {
+        width: 90%;
+        margin: 0 auto;
+        padding: 0 10px; 
+    }
+
+    /* NAVIGATION FIXES (Addressing the menu wrap and alignment) */
+    header {
+        flex-direction: column; 
+        padding: 15px 5%;
+        text-align: center;
+        align-items: center; 
+        width: 100%; 
+        box-sizing: border-box; 
+    }
+
+    header .logo {
+        margin-bottom: 10px;
+    }
+
+    header nav {
+        width: 100%; 
+    }
+    
+    header ul {
+        flex-direction: column; 
+        align-items: center; 
+        width: 100%;
+    }
+
+    header ul li {
+        width: 100%; 
+        margin-bottom: 5px; 
+    }
+
+    header a {
+        padding: 8px 0;
+        display: block; 
+        border-bottom: 1px solid #eee; 
+    }
+    
+    /* FIX: Show the wrapper on mobile and center its content */
+    .cta-wrapper-mobile {
+        display: block;
+        width: 100%; 
+        text-align: center; /* CENTERING FIX: Centers the inline CTA button */
+        padding-top: 15px; 
+    }
+
+    /* Adjust button inside the wrapper for centering */
+    .cta-button {
+        display: inline-block; 
+        margin: 0; 
+        width: auto; 
+        font-size: 0.9em;
+        padding: 12px 25px; 
+    }
+}
+
+/* SECTION SPECIFIC ADJUSTMENTS (Gallery Text Alignment Fix) */
+.kitchen-gallery-grid {
+    flex-direction: column; 
+}
+
+.range-card {
+    flex-basis: 100%; 
+    text-align: center;
+    padding: 0 10px; 
+}
+
+.range-card img {
+    margin: 0 auto;
+}
+
+.range-card h3 {
+    padding: 10px 0;
+}
+
+.trust-icons-section .container,
+.process-steps,
+footer {
+    flex-direction: column; 
+    text-align: center;
+}
+
+.feature-card, .step, .footer-links, .contact-info, .copyright {
+    flex-basis: 100%;
+    margin-bottom: 20px;
+}
+
+.hero-content h1 {
+    font-size: 2em;
+}
+
+.copyright {
+    text-align: center;
+}
